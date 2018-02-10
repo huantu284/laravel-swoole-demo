@@ -10,7 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+$api = app('Dingo\Api\Routing\Router');
 
-Route::get('/user', 'HomeController@user');
-Route::get('/admin', 'HomeController@admin');
-Route::get('/common', 'HomeController@common');
+$api->version('v1', function ($api) {
+	$api->group(['namespace'=>'App\Http\Controllers'], function ($api) {
+		$api->get('/user', 'HomeController@user');
+		$api->get('/admin', 'HomeController@admin');
+		$api->get('/common', 'HomeController@common');
+	});
+});
